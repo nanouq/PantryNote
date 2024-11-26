@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PantryApplication.Data;
 using PantryApplication.Models;
 
 namespace PantryApplication.Controllers
 {
+    [Authorize]
     public class PantryController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -36,17 +38,14 @@ namespace PantryApplication.Controllers
             obj.PantryId = 1;
             obj.DateAdded = DateTime.Now;
 
-            _db.Item.Add(obj);
-            _db.SaveChanges();
-            TempData["successful"] = "New perishable item created successfully";
-            return RedirectToAction("Index");
-
-/*
             if (ModelState.IsValid)
             {
-                
+                _db.Item.Add(obj);
+                _db.SaveChanges();
+                TempData["successful"] = "New perishable item created successfully";
+                return RedirectToAction("Index");
             }
-            return View();*/
+            return View();
         }
 
         public IActionResult NonPerishable()
@@ -60,16 +59,14 @@ namespace PantryApplication.Controllers
             obj.PantryId = 1;
             obj.DateAdded = DateTime.Now;
 
-            _db.Item.Add(obj);
-            _db.SaveChanges();
-            TempData["successful"] = "New non-perishable item created successfully";
-            return RedirectToAction("Index");
-
-            /*if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                
+                _db.Item.Add(obj);
+                _db.SaveChanges();
+                TempData["successful"] = "New non-perishable item created successfully";
+                return RedirectToAction("Index");
             }
-            return View();*/
+            return View();
         }
 
         public IActionResult Edit(int id)
@@ -110,11 +107,14 @@ namespace PantryApplication.Controllers
         [HttpPost]
         public IActionResult EditPerishable(PerishableItem perishableItem)
         {
-            
-            _db.Item.Update(perishableItem);
-            _db.SaveChanges();
-            TempData["successful"] = "Perishable item updated successfully";
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                _db.Item.Update(perishableItem);
+                _db.SaveChanges();
+                TempData["successful"] = "Perishable item updated successfully";
+                return RedirectToAction("Index");
+            }
+            return View();
 
         }
 
@@ -134,12 +134,14 @@ namespace PantryApplication.Controllers
         [HttpPost]
         public IActionResult EditNonPerishable(PerishableItem nonPerishableItem)
         {
-
-            _db.Item.Update(nonPerishableItem);
-            _db.SaveChanges();
-            TempData["successful"] = "Non-perishable item updated successfully";
-            return RedirectToAction("Index");
-
+            if (ModelState.IsValid)
+            {
+                _db.Item.Update(nonPerishableItem);
+                _db.SaveChanges();
+                TempData["successful"] = "Non-perishable item updated successfully";
+                return RedirectToAction("Index");
+            }
+            return View();
         }
 
         [HttpPost]

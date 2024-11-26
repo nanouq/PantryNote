@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using PantryApplication.Models;
 
 namespace PantryApplication.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -12,12 +13,14 @@ namespace PantryApplication.Data
 
         public DbSet<Pantry> Pantry { get; set; }
         public DbSet<Item> Item { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Pantry>().HasData(
-                new Pantry { Id = 1, UserId = 1 },
-                new Pantry { Id = 2, UserId = 2 }
+                new Pantry { Id = 1, UserId = "39d77c7b-2212-4ded-85cf-9f86cb9d18df" }
                 );
 
             modelBuilder.Entity<Item>()

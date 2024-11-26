@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("PantryApplication")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+57da3abf15cacf094f824ea33cb465ca1adf8487")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+820afdd66951e15f26c1486016754032a8efba06")]
 [assembly: System.Reflection.AssemblyProductAttribute("PantryApplication")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PantryApplication")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
