@@ -156,5 +156,15 @@ namespace PantryApplication.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public IActionResult Search(string search)
+        {
+            var results = _db.Item
+                .Where(item => item.Name.Contains(search))
+                .ToList();
+
+            ViewBag.Search = search;
+            return View("SearchResults", results);
+        }
     }
 }

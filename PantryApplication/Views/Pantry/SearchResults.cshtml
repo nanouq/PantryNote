@@ -1,0 +1,56 @@
+﻿@model List<Item>
+
+<a asp-controller="Pantry" asp-action="Index" class="btn btn-sm btn-secondary">Back</a>
+<h2 class="mt-2">Search results for "@ViewBag.Search":</h2>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Category
+                </th>
+                <th>
+                    Brand
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    Location
+                </th>
+                <th>
+                    Expiration
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td>@obj.Name</td>
+                    <td>@obj.Category</td>
+                    <td>@(!string.IsNullOrEmpty(obj.Brand) ? obj.Brand : "Not set")</td>
+                    <td>@obj.Quantity @obj.Unit</td>
+                    <td>@obj.Location</td>
+                    <td>@(obj.ExpirationDate.HasValue ? obj.ExpirationDate.Value.ToString("d") : "Not set")</td>
+                    <td>
+                        <div class="w-100 btn-group" role="group">
+                            <a asp-controller="Pantry" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-secondary mx-1">
+                                <i class="bi bi-pencil-square"></i> Edit
+                            </a>
+                            <button class="btn btn-secondary mx-1" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                    onclick="setDeleteFormAction(@obj.Id)">
+                                <i class="bi bi-trash"></i> Delete
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+</div>
