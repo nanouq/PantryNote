@@ -5,12 +5,32 @@
       "PackagePath": "staticwebassets\\PantryApplication.bundle.scp.css"
     },
     {
-      "Id": "E:\\D424\\PantryApplication\\wwwroot\\css\\img\\pantry-hero.svg",
-      "PackagePath": "staticwebassets\\css\\img\\pantry-hero.svg"
+      "Id": "E:\\D424\\PantryApplication\\wwwroot\\css\\img\\Vegetables.svg",
+      "PackagePath": "staticwebassets\\css\\img\\Vegetables.svg"
     },
     {
-      "Id": "E:\\D424\\PantryApplication\\wwwroot\\css\\img\\pantry.png",
-      "PackagePath": "staticwebassets\\css\\img\\pantry.png"
+      "Id": "E:\\D424\\PantryApplication\\wwwroot\\css\\img\\bank-account.svg",
+      "PackagePath": "staticwebassets\\css\\img\\bank-account.svg"
+    },
+    {
+      "Id": "E:\\D424\\PantryApplication\\wwwroot\\css\\img\\being-at-peace.svg",
+      "PackagePath": "staticwebassets\\css\\img\\being-at-peace.svg"
+    },
+    {
+      "Id": "E:\\D424\\PantryApplication\\wwwroot\\css\\img\\eco-market.svg",
+      "PackagePath": "staticwebassets\\css\\img\\eco-market.svg"
+    },
+    {
+      "Id": "E:\\D424\\PantryApplication\\wwwroot\\css\\img\\empty-folder.svg",
+      "PackagePath": "staticwebassets\\css\\img\\empty-folder.svg"
+    },
+    {
+      "Id": "E:\\D424\\PantryApplication\\wwwroot\\css\\img\\illustrator-drawing-paint.svg",
+      "PackagePath": "staticwebassets\\css\\img\\illustrator-drawing-paint.svg"
+    },
+    {
+      "Id": "E:\\D424\\PantryApplication\\wwwroot\\css\\img\\pantry-hero.svg",
+      "PackagePath": "staticwebassets\\css\\img\\pantry-hero.svg"
     },
     {
       "Id": "E:\\D424\\PantryApplication\\wwwroot\\css\\img\\to-do-notes.svg",

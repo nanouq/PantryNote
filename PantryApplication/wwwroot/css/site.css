@@ -20,3 +20,29 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.section-text {
+    font-family: "Fraunces", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    color: #330C00;
+    font-style: normal;
+}
+
+.hero-button {
+    background-color: #501200; 
+}
+
+.section-body {
+    color: #361D18;
+    
+}
+
+.nav-text {
+    font-family: "Fraunces", serif;
+    font-weight: 600;
+}
+
+.navbar {
+    background-color: #FFF2EC;
+}

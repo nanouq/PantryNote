@@ -70,6 +70,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFudHJ5XEFkZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/D424/PantryApplication/Views/Pantry/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFudHJ5XERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/D424/PantryApplication/Views/Pantry/EditNonPerishable.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFudHJ5XEVkaXROb25QZXJpc2hhYmxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -88,6 +92,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [E:/D424/PantryApplication/Views/Pantry/Perishable.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFudHJ5XFBlcmlzaGFibGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/D424/PantryApplication/Views/Pantry/Report.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFudHJ5XFJlcG9ydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/D424/PantryApplication/Views/Pantry/SearchResults.cshtml]

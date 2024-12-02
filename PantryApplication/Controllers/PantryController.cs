@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PantryApplication.Data;
 using PantryApplication.Models;
 
@@ -8,17 +10,24 @@ namespace PantryApplication.Controllers
     [Authorize]
     public class PantryController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _db;
-        public PantryController(ApplicationDbContext db)
+        public PantryController(ApplicationDbContext db, UserManager<ApplicationUser> userManager)
         {
             _db = db;
+            _userManager = userManager;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            //Test database => on screen functionality
-            //List<Pantry> objPantryList = _db.Pantry.ToList();
-            List<Item> objItemList = _db.Item.ToList();
-            return View(objItemList);
+            var userId = _userManager.GetUserId(User);
+
+            var userPantry = await _db.Pantry.FirstOrDefaultAsync(p => p.UserId == userId);
+
+            var userItems = await _db.Item
+                .Where(i => i.PantryId == userPantry.Id)
+                .ToListAsync();
+
+            return View(userItems);
         }
 
         public IActionResult Add() 
@@ -30,12 +39,14 @@ namespace PantryApplication.Controllers
         {
             return View();
         }
-        [HttpPost]
-        public IActionResult Perishable(PerishableItem obj)
-        {
 
-            //hard codes pantry id as 1 for testing, remove this once user login is implemented
-            obj.PantryId = 1;
+        [HttpPost]
+        public async Task<IActionResult> Perishable(PerishableItem obj)
+        {
+            var userId = _userManager.GetUserId(User);
+            var pantry = await _db.Pantry.FirstOrDefaultAsync(p => p.UserId == userId);
+
+            obj.PantryId = pantry.Id;
             obj.DateAdded = DateTime.Now;
 
             if (ModelState.IsValid)
@@ -52,11 +63,14 @@ namespace PantryApplication.Controllers
         {
             return View();
         }
+
         [HttpPost]
-        public IActionResult NonPerishable(NonPerishableItem obj)
+        public async Task<IActionResult> NonPerishable(NonPerishableItem obj)
         {
-            //hard codes pantry id as 1 for testing, remove this once user login is implemented
-            obj.PantryId = 1;
+            var userId = _userManager.GetUserId(User);
+            var pantry = await _db.Pantry.FirstOrDefaultAsync(p => p.UserId == userId);
+
+            obj.PantryId = pantry.Id;
             obj.DateAdded = DateTime.Now;
 
             if (ModelState.IsValid)
@@ -166,5 +180,83 @@ namespace PantryApplication.Controllers
             ViewBag.Search = search;
             return View("SearchResults", results);
         }
+
+        [HttpPost]
+        public IActionResult Report(string reportType)
+        {
+            var userId = _userManager.GetUserId(User);
+            var pantryId = _db.Pantry.FirstOrDefault(p => p.UserId ==  userId)?.Id;
+            var today = DateTime.Now;
+            var title = "";         
+            if (pantryId == null)
+            {
+                return NotFound("Pantry not found for current user");
+            }
+
+            switch (reportType)
+            {
+                //items expiring within 30 days
+                case "1":
+                    var thirtyDaysFromNow = today.AddDays(30);
+
+                    var expiringItems = _db.Item
+                        .Where(item => item.PantryId == pantryId
+                        && item.ExpirationDate != null
+                        && item.ExpirationDate.Value >= today
+                        && item.ExpirationDate.Value <= thirtyDaysFromNow)
+                        .OrderBy(item => item.ExpirationDate)
+                        .ToList();
+                    title = "Items Expiring Soon Report";
+                    var expiringColumns = new List<string> { "Item Name", "Quantity", "Expiration Date" };
+                    var expiringRows = expiringItems
+                        .Select(item => new List<string>
+                        {
+                            item.Name,
+                            item.Quantity.ToString(),
+                            item.ExpirationDate?.ToString("yyyy-MM-dd")
+                        }).ToList();
+                    return View(Tuple.Create(title, expiringColumns, expiringRows));
+                //Count by category
+                case "2":
+                    var categoryCount = _db.Item
+                        .Where(item => item.PantryId == pantryId)
+                        .GroupBy(item => item.Category)
+                        .Select(group => new
+                        {
+                            Category = group.Key,
+                            NumberOfItems = group.Count(),
+                            LastItemAdded = group.Max(item => item.DateAdded)
+                        }).ToList();
+                    title = "Category Count Report";
+                    var categoryColumns = new List<string> { "Category", "Number of Items", "Date of Last Item Added" };
+                    var categoryRows = categoryCount
+                        .Select(group => new List<string>
+                        {
+                            group.Category,
+                            group.NumberOfItems.ToString(),
+                            group.LastItemAdded.ToString("yyyy-MM-dd")
+                        }).ToList();
+                    return View(Tuple.Create(title, categoryColumns, categoryRows));
+                case "3":
+                    break;
+                default:
+                    TempData["error"] = "Invalid report type selected";
+                    return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
+        
+        public IActionResult Details(int id)
+        {
+            var item = _db.Item.Find(id);
+
+            if (item == null)
+            {
+                return NotFound();
+            }   
+            
+            return View(item);
+        }
+
     }
 }

@@ -33,5 +33,11 @@ namespace PantryApplication.Models
         [ForeignKey("PantryId")]
         [ValidateNever]
         public Pantry Pantry { get; set; }
+
+        public abstract string IsExpired();
+        public virtual string GetStorageInstructions()
+        {
+            return $"Store {Name} in a cool, dry place.";
+        }
     }
 }

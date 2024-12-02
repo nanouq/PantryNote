@@ -1,56 +1,102 @@
 ﻿@model List<Item>
+@{
+    ViewData["Title"] = "Search Results";
+}
 
 <a asp-controller="Pantry" asp-action="Index" class="btn btn-sm btn-secondary">Back</a>
-<h2 class="mt-2">Search results for "@ViewBag.Search":</h2>
-<div class="table-responsive">
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Category
-                </th>
-                <th>
-                    Brand
-                </th>
-                <th>
-                    Quantity
-                </th>
-                <th>
-                    Location
-                </th>
-                <th>
-                    Expiration
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var obj in Model)
-            {
+@if (Model == null || !Model.Any())
+{
+    <div class="container">
+        <div class="row justify-content-center">
+            <img src="~/css/img/empty-folder.svg" class="img-fluid" style="max-width: 400px;" /> 
+        </div>
+        <div class="row text-center py-3">
+            <h4>No results found for "@ViewBag.Search". Please <a asp-controller="Pantry" asp-action="Index">try again</a> with a different search.</h4>
+        </div>
+        
+    </div>  
+}
+else
+{
+    <h2 class="mt-2">Search results for "@ViewBag.Search":</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
                 <tr>
-                    <td>@obj.Name</td>
-                    <td>@obj.Category</td>
-                    <td>@(!string.IsNullOrEmpty(obj.Brand) ? obj.Brand : "Not set")</td>
-                    <td>@obj.Quantity @obj.Unit</td>
-                    <td>@obj.Location</td>
-                    <td>@(obj.ExpirationDate.HasValue ? obj.ExpirationDate.Value.ToString("d") : "Not set")</td>
-                    <td>
-                        <div class="w-100 btn-group" role="group">
-                            <a asp-controller="Pantry" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-secondary mx-1">
-                                <i class="bi bi-pencil-square"></i> Edit
-                            </a>
-                            <button class="btn btn-secondary mx-1" data-bs-toggle="modal" data-bs-target="#deleteModal"
-                                    onclick="setDeleteFormAction(@obj.Id)">
-                                <i class="bi bi-trash"></i> Delete
-                            </button>
-                        </div>
-                    </td>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Category
+                    </th>
+                    <th>
+                        Brand
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Location
+                    </th>
+                    <th>
+                        Expiration
+                    </th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
-</div>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        <td>@obj.Name</td>
+                        <td>@obj.Category</td>
+                        <td>@(!string.IsNullOrEmpty(obj.Brand) ? obj.Brand : "Not set")</td>
+                        <td>@obj.Quantity @obj.Unit</td>
+                        <td>@obj.Location</td>
+                        <td>@(obj.ExpirationDate.HasValue ? obj.ExpirationDate.Value.ToString("d") : "Not set")</td>
+                        <td>
+                            <div class="w-100 btn-group" role="group">
+                                <a asp-controller="Pantry" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-secondary mx-1">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                </a>
+                                <button class="btn btn-secondary mx-1" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                        onclick="setDeleteFormAction(@obj.Id)">
+                                    <i class="bi bi-trash"></i> Delete
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this item?</p>
+                </div>
+                <div class="modal-footer">
+                    <form id="deleteForm" method="post">
+                        <button type="submit" class="btn btn-secondary">Yes, delete</button>
+                    </form>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">No, cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function setDeleteFormAction(itemId) {
+            const form = document.getElementById('deleteForm');
+            form.action = `/Pantry/Delete/${itemId}`;
+        }
+    </script>
+}

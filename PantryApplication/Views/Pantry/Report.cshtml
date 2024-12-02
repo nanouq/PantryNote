@@ -1,0 +1,28 @@
+﻿@model Tuple<string, List<string>, List<List<string>>>
+
+<h2>@Model.Item1</h2>
+<div class="table-responsive">
+
+    
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                @foreach (var column in Model.Item2)
+                {
+                    <th>@column</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in Model.Item3)
+            {
+                <tr>
+                    @foreach (var cell in row)
+                    {
+                        <td>@cell</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>  
+</div>
