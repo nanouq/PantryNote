@@ -45,7 +45,8 @@ namespace PantryApplication.Test
 
             var isExpired = item.IsExpired();
 
-            Assert.Equal("Pasta is past expiration date, but still sealed. This item should be safe to eat, but check for signs of spoilage before consuming.", isExpired);
+            Assert.Equal("Pasta is past expiration date, but still sealed. This item should be safe to eat," +
+                " but check for signs of spoilage before consuming.", isExpired);
         }
 
         [Fact]

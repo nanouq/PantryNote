@@ -35,6 +35,7 @@ namespace PantryApplication.Test
                 null
                 );
         }
+
         [Fact]
         public void SearchItems_ReturnsCorrectResults()
         {
@@ -147,8 +148,22 @@ namespace PantryApplication.Test
             context.Pantry.Add(pantry);
 
             context.Item.AddRange(
-                    new PerishableItem { Id = 1, Name = "Milk", PantryId = 1, Category = "Dairy", Location = "Fridge", Unit = "Cartons", ExpirationDate = DateTime.Now.AddDays(1)},
-                    new NonPerishableItem { Id = 2, Name = "Pasta", PantryId = 1, Category = "Dry Goods", Location = "Pantry", Unit = "Box", ExpirationDate = DateTime.Now.AddDays(1) }
+                    new PerishableItem { 
+                        Id = 1, 
+                        Name = "Milk", 
+                        PantryId = 1, 
+                        Category = "Dairy", 
+                        Location = "Fridge", 
+                        Unit = "Cartons", 
+                        ExpirationDate = DateTime.Now.AddDays(1)},
+                    new NonPerishableItem { 
+                        Id = 2, 
+                        Name = "Pasta", 
+                        PantryId = 1, 
+                        Category = "Dry Goods", 
+                        Location = "Pantry", 
+                        Unit = "Box", 
+                        ExpirationDate = DateTime.Now.AddDays(1) }
                 );
 
             context.SaveChanges();
@@ -169,7 +184,6 @@ namespace PantryApplication.Test
         [Fact]
         public void Report_ReturnCategoryCountSuccessfully()
         {
-            //Arrange
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(databaseName: "ReportReturnCategoryTest")
                 .Options;
@@ -192,10 +206,8 @@ namespace PantryApplication.Test
 
             var controller = new PantryController(context, mockUserManager.Object);
 
-            // Act
             var result = controller.Report("2") as ViewResult;
 
-            // Assert
             Assert.NotNull(result);
             var model = Assert.IsType<Tuple<string, List<string>, List<List<string>>>>(result.Model);
             Assert.Equal("Category Count Report", model.Item1);
@@ -205,7 +217,6 @@ namespace PantryApplication.Test
         [Fact]
         public void Report_MissingPantryNotFound()
         {
-            // Arrange
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(databaseName: "ReportMissingTest")
                 .Options;
@@ -218,10 +229,8 @@ namespace PantryApplication.Test
 
             var controller = new PantryController(context, mockUserManager.Object);
 
-            // Act
             var result = controller.Report("1");
 
-            // Assert
             var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
             Assert.Equal("Pantry not found for current user", notFoundResult.Value);
         }
@@ -229,7 +238,6 @@ namespace PantryApplication.Test
         [Fact]
         public void Report_InvalidReportRedirect()
         {
-            //Arrange
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(databaseName: "ReportInvalidTest")
                 .Options;
@@ -255,10 +263,8 @@ namespace PantryApplication.Test
             var tempData = new Mock<ITempDataDictionary>();
             controller.TempData = tempData.Object;
 
-            // Act
             var result = controller.Report("invalidType");
 
-            // Assert
             var redirectResult = Assert.IsType<RedirectToActionResult>(result);
             Assert.Equal("Index", redirectResult.ActionName);
             tempData.VerifySet(t => t["error"] = "Invalid report type selected", Times.Once);        }
