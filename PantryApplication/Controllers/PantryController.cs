@@ -146,7 +146,7 @@ namespace PantryApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditNonPerishable(PerishableItem nonPerishableItem)
+        public IActionResult EditNonPerishable(NonPerishableItem nonPerishableItem)
         {
             if (ModelState.IsValid)
             {
@@ -237,8 +237,6 @@ namespace PantryApplication.Controllers
                             group.LastItemAdded.ToString("yyyy-MM-dd")
                         }).ToList();
                     return View(Tuple.Create(title, categoryColumns, categoryRows));
-                case "3":
-                    break;
                 default:
                     TempData["error"] = "Invalid report type selected";
                     return RedirectToAction("Index");

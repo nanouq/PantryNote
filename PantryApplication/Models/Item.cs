@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PantryApplication.Models
 {
@@ -38,6 +39,11 @@ namespace PantryApplication.Models
         public virtual string GetStorageInstructions()
         {
             return $"Store {Name} in a cool, dry place.";
+        }
+
+        public string GetFormattedQuantity()
+        {
+            return Quantity % 1 == 0 ? Quantity.ToString("0") : Quantity.ToString("0.##");
         }
     }
 }

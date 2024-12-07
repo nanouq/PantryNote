@@ -1,28 +1,53 @@
 ﻿@model Tuple<string, List<string>, List<List<string>>>
 
-<h2>@Model.Item1</h2>
-<div class="table-responsive">
+    <div class="row align-items-center py-4">
+        <div class="d-flex align-items-center">
+            <a asp-controller="Pantry" asp-action="Index" class="btn text-dark me-4">
+                <i class="bi bi-chevron-left"></i>
+            </a>
+            <h2 class="section-title">@Model.Item1</h2>
+        </div>
+    </div>
 
-    
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                @foreach (var column in Model.Item2)
-                {
-                    <th>@column</th>
-                }
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var row in Model.Item3)
-            {
+
+@if (Model == null || !Model.Item3.Any())
+{
+    <div class="container">
+        <div class="row justify-content-center">
+            <img src="~/css/img/empty-folder.svg" class="img-fluid" style="max-width: 400px;" />
+        </div>
+        <div class="row text-center py-3">
+            <h4>No items found! It looks like you don't have enough items to support this report.</h4>
+        </div>
+
+    </div>
+}
+else
+{
+    <div class="table-responsive py-3">
+
+
+        <table class="table table-bordered table-striped border-dark-subtle">
+            <thead>
                 <tr>
-                    @foreach (var cell in row)
+                    @foreach (var column in Model.Item2)
                     {
-                        <td>@cell</td>
+                        <th>@column</th>
                     }
                 </tr>
-            }
-        </tbody>
-    </table>  
-</div>
+            </thead>
+            <tbody>
+                @foreach (var row in Model.Item3)
+                {
+                    <tr>
+                        @foreach (var cell in row)
+                        {
+                            <td>@cell</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+

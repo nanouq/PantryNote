@@ -1,9 +1,14 @@
 ﻿@{
     ViewData["Title"] = "Add Item";
 }
+<div class="d-flex align-items-center justify-content-center">
+    <a asp-controller="Pantry" asp-action="Index" class="btn text-dark me-2">
+        <i class="bi bi-chevron-left"></i>
+    </a>
+    <h1 class="text-center m-5 section-title">What kind of item is this?</h1>
+</div>
 
-<h2 class="text-center m-5">What kind of item is this?</h2>
 <div class="d-grid gap-4 col-6 mx-auto">
-    <a asp-controller="Pantry" asp-action="Perishable" class="btn btn-lg btn-secondary py-3">Perishable</a>
-    <a asp-controller="Pantry" asp-action="NonPerishable" class="btn btn-lg btn-secondary py-3">Non-Perishable</a>
+    <a asp-controller="Pantry" asp-action="Perishable" class="btn btn-lg btn-secondary py-3 hero-button">Perishable</a>
+    <a asp-controller="Pantry" asp-action="NonPerishable" class="btn btn-lg btn-secondary py-3 hero-button">Non-Perishable</a>
 </div>

@@ -9,12 +9,12 @@
 @if (Model == null || !Model.Any())
 {
     <div class="container-fluid py-3">
-        <h2 class="section-text">Welcome to your pantry, @UserManager.GetUserAsync(User).Result.Name.</h2>
+        <h2 class="section-title">Welcome to your pantry, @UserManager.GetUserAsync(User).Result.Name.</h2>
         <div class="row justify-content-center py-5">
             <img src="~/css/img/illustrator-drawing-paint.svg" class="img-fluid" style="max-width: 400px;" /> 
         </div>
         <div class="row text-center py-1">
-            <h3 class="section-text">It looks like your pantry is empty. Add your first item now!</h3>
+            <h3 class="section-body">It looks like your pantry is empty. Add your first item now!</h3>
         </div>
         <div class="row align-items-center py-3">
             <div class="text-center">
@@ -26,10 +26,11 @@
 }
 else
 {
-<div class="container">
+
+<div class="container py-3">
     <div class="row pt-4 pb-4">
         <div class="col-6">
-            <h2 class="section-text">Welcome to your pantry, @UserManager.GetUserAsync(User).Result.Name.</h2>
+                <h2 class="section-title">Welcome to your pantry, @UserManager.GetUserAsync(User).Result.Name.</h2>
         </div>
         <div class="col-6 text-end d-flex justify-content-end align-items-center">
             <a asp-controller="Pantry" asp-action="Add" class="btn btn-secondary ms-2 align-self-stretch align-content-center">
@@ -46,13 +47,13 @@ else
                 </button>
             </form>
             
-            <button type="button" class="btn btn-outline-primary text-decoration-none" data-bs-toggle="modal" data-bs-target="#reportModal">
+            <button type="button" class="btn btn-primary text-decoration-none" data-bs-toggle="modal" data-bs-target="#reportModal">
                 <i class="bi bi-file-text-fill"></i>Generate Report
             </button>
         </div>           
     </div>
     <div class="table-responsive">
-        <table class="table table-bordered table-striped table-hover border-primary-subtle rounded">
+        <table class="table table-bordered table-striped table-hover border-secondary-subtle rounded table-custom" id="pantryTable">
             <thead>
                 <tr>
                     <th>
@@ -73,7 +74,9 @@ else
                     <th>
                         Expiration
                     </th>
-                    <th></th>
+                    <th>
+                        Edit / Delete
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -83,7 +86,7 @@ else
                         <td><a asp-controller="Pantry" asp-action="Details" asp-route-id="@obj.Id" class="text-decoration-none text-dark">@obj.Name</a></td>
                         <td>@obj.Category</td>
                         <td>@(!string.IsNullOrEmpty(obj.Brand) ? obj.Brand : "Not set")</td>                   
-                        <td>@obj.Quantity @obj.Unit</td>
+                        <td>@obj.GetFormattedQuantity() @obj.Unit</td>
                         <td>@obj.Location</td>
                         <td>@(obj.ExpirationDate.HasValue ? obj.ExpirationDate.Value.ToString("d") : "Not set")</td>
                         <td>
@@ -144,7 +147,6 @@ else
                             <option value="" disabled selected>Choose a report type</option>
                             <option value="1">Items Expiring Soon</option>
                             <option value="2">Category Count</option>
-                            <option value="3">Option 3</option>
                         </select>
                     </div>
                     <div class="modal-footer">
@@ -162,5 +164,6 @@ else
         const form = document.getElementById('deleteForm');
         form.action = `/Pantry/Delete/${itemId}`;
     }
+
 </script>
 }

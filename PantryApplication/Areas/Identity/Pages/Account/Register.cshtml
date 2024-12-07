@@ -4,12 +4,20 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>@ViewData["Title"]</h1>
 
-<div class="row">
-    <div class="col-md-12">
+
+<div class="row vh-100 align-items-center">
+    <div class="col-md-6 d-flex flex-column justify-content center align-items-center text-center">
+        <h1 class="section-title">Welcome to PantryNote</h1>
+        <p class="section-body py-2">Organize your pantry like never before.</p>
+        <img src="~/css/img/about-us.svg" class="img-fluid mb-4" style="width: 100%; max-width: 300px; height: auto;"/>   
+    </div>
+
+
+    <div class="col-md-6 d-flex flex-column justify-content-center">
+        <h3 class="section-title">Create your account</h3>
+        <p class="py-3 section-body">It's free and easy</p>
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="form-floating mb-3">
                 <input asp-for="Input.Name" class="form-control" placeholder="First Name" />
@@ -31,17 +39,21 @@
                 <label asp-for="Input.ConfirmPassword">Confirm Password</label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-secondary">Register</button>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-secondary hero-button">Register</button>
 
             <div class="mt-4">
                 <p>
-                   Already have an account? <a id="login" asp-page="./Login">Log in</a>
+                    Already have an account? <a id="login" asp-page="./Login">Log in</a>
                 </p>
             </div>
         </form>
     </div>
-    
 </div>
+
+
+
+
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

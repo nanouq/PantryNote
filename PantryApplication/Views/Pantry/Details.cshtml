@@ -1,7 +1,5 @@
 ﻿@model Item
 @{
-    decimal number = @Model.Quantity;
-    string formattedNumber = number % 1 == 0 ? number.ToString("0") : number.ToString("0.##");
     ViewData["Title"] = @Model.Name;
 }
 
@@ -15,7 +13,7 @@
                     </a>
                 </div>
                 <div class="col-11 text-center">
-                    <h4>Item Details</h4>
+                    <h3 class="section-title">Item Details</h3>
                 </div>
             </div>
         </div>
@@ -26,17 +24,17 @@
 
             <div class="col-md-8">
                 <div class="card-body">
-                    <h2 class="card-title">@Model.Name <small class="opacity-75 fst-italic"> @Model.Brand</small></h2>
+                    <h2 class="card-title">@Model.Name <small class="opacity-75 fst-italic"> @(!string.IsNullOrEmpty(Model.Brand) ? Model.Brand : "Not set")</small></h2>
                     <hr />
 
                     <div class="card-text">
-                        <p><strong>Category: </strong>@Model.Category</p>
-                        <p><strong>Date added: </strong>@Model.DateAdded.ToString("d")</p>
-                        <p><strong>Expiration date: </strong>@Model.ExpirationDate.Value.ToString("d")</p>
-                        <p><strong>Quantity: </strong>@formattedNumber @Model.Unit</p>
-                        <p><strong>Location: </strong>@Model.Location</p>
-                        <p><strong>Is this item expired?: </strong>@Model.IsExpired()</p>
-                        <p><strong>Storage instructions: </strong>@Model.GetStorageInstructions()</p>
+                        <p class="section-body"><strong>Category: </strong>@Model.Category</p>
+                        <p class="section-body"><strong>Date added: </strong>@Model.DateAdded.ToString("d")</p>
+                        <p class="section-body"><strong>Expiration date: </strong>@(Model.ExpirationDate.HasValue ? Model.ExpirationDate.Value.ToString("d") : "Not set")</p>
+                        <p class="section-body"><strong>Quantity: </strong>@Model.GetFormattedQuantity() @Model.Unit</p>
+                        <p class="section-body"><strong>Location: </strong>@Model.Location</p>
+                        <p class="section-body"><strong>Is this item expired?: </strong>@Model.IsExpired()</p>
+                        <p class="section-body"><strong>Storage instructions: </strong>@Model.GetStorageInstructions()</p>
                     </div>
                 </div>
             </div>

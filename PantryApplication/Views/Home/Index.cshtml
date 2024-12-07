@@ -6,33 +6,34 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
+    <div class="hero-container">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md order-last text-center text-md-start ms-lg-4">
+                    <h1 class="display-3 section-title">A Digital Pantry for Simplifying Your Life</h1>
+                    <p class="section-body py-1">Never forget what's in your pantry again.</p>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <a class="btn btn-secondary mt-3 hero-button" asp-controller="Pantry" asp-action="Index">Get Started</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-secondary mt-3 hero-button" asp-area="Identity" asp-page="/Account/Register">Get Started</a>
+                    }
 
-<div class="container-fluid hero-container">
-    <div class="row align-items-center mt-lg-5">
-        <div class="col-md order-last text-center text-md-start ms-lg-4">
-            <h1 class="display-3 section-text">A Digital Pantry for Simplifying Your Life</h1>
-            <p class="section-body">Never forget what's in your pantry again.</p>
-             
-            @if (SignInManager.IsSignedIn(User))
-            {
-                <a class="btn btn-secondary mt-3 hero-button" asp-controller="Pantry" asp-action="Index">Get Started</a>
-            }
-            else
-            {
-                <a class="btn btn-secondary mt-3 hero-button" asp-area="Identity" asp-page="/Account/Register">Get Started</a>
-            }
-            
-        </div>
-        <div class="col-md order-first me-5 ">
-            <img src="~/css/img/pantry-hero.svg"class="img-fluid" style="width:100%; height: auto;"/>
+                </div>
+            <div class="col-md order-first me-5 ">
+                <img src="~/css/img/pantry-hero.svg" class="img-fluid" style="width:100%; height: auto;" />
+            </div>
+            </div>
         </div>
     </div>
-</div>
+
 
 <div class="container-fluid  p-5" >
     <div class="row align-items-center ">
         <div class="col-md text-center text-md-start">
-            <h1 class="display-5  section-text">Your pantry, whenever, wherever!</h1>
+            <h1 class="display-5  section-title">Your pantry, whenever, wherever!</h1>
             <p class="mt-4 section-body">Have you ever double-bought a pantry item, only to find an unopened box gathering dust in the back? 
                 Or run to the store for salt, forgetting you’ve run out? Say no more! With our app, 
                 those days are as lost as a rice grain in your kitchen floor tiles.</p>
@@ -46,7 +47,7 @@
 <div class="container-fluid p-5">
     <div class="row align-items-center mt-5">
         <div class="text-center">
-            <h1 class="display-5 section-text">How it works</h1>
+            <h1 class="display-5 section-title">How it works</h1>
             <p class="mt-5 section-body">
                 PantryNote was designed to be a convenient digital pantry option to keep track of what’s 
                 in your kitchen, so you don’t have to be in your kitchen to find out. PantryNote allows you 

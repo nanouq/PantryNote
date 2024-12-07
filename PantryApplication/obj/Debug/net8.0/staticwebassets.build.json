@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "AZ5f96bPRk9ke3WROhIqIA2VUVWUWLMwqf7yUTgT3SY=",
+  "Hash": "xAS69WDkd6+Z6GropgvijOOtP26bCh9JN0ZcLqKLwQA=",
   "Source": "PantryApplication",
   "BasePath": "_content/PantryApplication",
   "Mode": "Default",
@@ -1193,6 +1193,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "E:\\D424\\PantryApplication\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\PantryApplication.bundle.scp.css"
+    },
+    {
+      "Identity": "E:\\D424\\PantryApplication\\wwwroot\\css\\img\\about-us.svg",
+      "SourceId": "PantryApplication",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\D424\\PantryApplication\\wwwroot\\",
+      "BasePath": "_content/PantryApplication",
+      "RelativePath": "css/img/about-us.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\img\\about-us.svg"
     },
     {
       "Identity": "E:\\D424\\PantryApplication\\wwwroot\\css\\img\\bank-account.svg",

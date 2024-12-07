@@ -2,27 +2,34 @@
 @{
     ViewData["Title"] = "Add Non-Perishable Item";
 }
-<a asp-controller="Pantry" asp-action="Add" class="btn btn-sm btn-secondary">Back</a>
-<form class="border border-secondary-subtle border-2 mt-2 p-2 rounded" method="post">
+
+<form class="border border-2 mt-2 p-2 rounded" method="post">
     <div class="border p-3 mt-4">
         <div class="row pb-2">
-            <h2>Add non-perishable item</h2>
+            <div class="d-flex align-items-center">
+
+                <a asp-controller="Pantry" asp-action="Add" class="btn text-dark me-2">
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+                <h1 class="section-title">Add non-perishable item</h1>
+
+            </div>
             <hr />
         </div>
         <div class="mb-3 row p-1">
-            <label class="form-label">Name</label>
+            <label class="form-label section-body">Name</label>
             <input asp-for="Name" type="text" class="form-control" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
 
         <div class="mb-3 row p-1">
-            <label class="form-label">Brand</label>
+            <label class="form-label section-body">Brand <span class="text-muted">(optional)</span></label>
             <input asp-for="Brand" class="form-control" />
             <span asp-validation-for="Brand" class="text-danger"></span>
         </div>
 
         <div class="mb-3 row p-1">
-            <label class="form-label">Category</label>
+            <label class="form-label section-body">Category</label>
             <select asp-for="Category" class="form-select">
                 <option value="">-- Select Category --</option>
                 <option value="Dairy">Dairy</option>
@@ -39,30 +46,30 @@
 
         <div class="row">
             <div class="col-9 mb-3 p-1">
-                <label class="form-label">Quantity</label>
+                <label class="form-label section-body">Quantity</label>
                 <input asp-for="Quantity" class="form-control" />
                 <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
             <div class="col-3 mb-3  p-1">
-                <label class="form-label">Unit</label>
+                <label class="form-label section-body">Unit</label>
                 <input asp-for="Unit" class="form-control" placeholder="e.g., Each, Ounces, Pounds" />
                 <span asp-validation-for="Unit" class="text-danger"></span>
             </div>
         </div>
 
         <div class="mb-3 p-1">
-            <label class="form-label">Location</label>
+            <label class="form-label section-body">Location</label>
             <input asp-for="Location" class="form-control" placeholder="e.g., Pantry, Fridge, Freezer" />
             <span asp-validation-for="Location" class="text-danger"></span>
         </div>
 
         <div class="mb-3 p-1">
-            <label class="form-label">Expiration Date</label>
+            <label class="form-label section-body">Expiration Date <span class="text-muted">(optional)</span></label>
             <input asp-for="ExpirationDate" type="date" class="form-control" placeholder="e.g., Pantry, Fridge, Freezer" />
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Is your item sealed?</label>
+            <label class="form-label section-body">Is your item sealed?</label>
             <div class="btn-group" role="group">
                 <input asp-for="IsSealed" type="radio" class="btn-check" name="IsSealed" id="sealedTrue" value="true" />
                 <label class="btn btn-outline-secondary" for="sealedTrue">Yes</label>
