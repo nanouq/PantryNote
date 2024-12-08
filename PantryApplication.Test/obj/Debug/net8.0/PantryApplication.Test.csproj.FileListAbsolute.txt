@@ -377,3 +377,4 @@ E:\D424\PantryApplication.Test\obj\Debug\net8.0\PantryApplication.Test.pdb
 E:\D424\PantryApplication.Test\obj\Debug\net8.0\PantryApplication.Test.genruntimeconfig.cache
 E:\D424\PantryApplication.Test\obj\Debug\net8.0\ref\PantryApplication.Test.dll
 E:\D424\PantryApplication.Test\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.InMemory.dll
+E:\D424\PantryApplication.Test\bin\Debug\net8.0\appsettings.Production.json

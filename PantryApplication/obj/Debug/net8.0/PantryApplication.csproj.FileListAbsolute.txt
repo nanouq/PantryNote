@@ -316,3 +316,4 @@ E:\D424\PantryApplication\obj\Debug\net8.0\refint\PantryApplication.dll
 E:\D424\PantryApplication\obj\Debug\net8.0\PantryApplication.pdb
 E:\D424\PantryApplication\obj\Debug\net8.0\PantryApplication.genruntimeconfig.cache
 E:\D424\PantryApplication\obj\Debug\net8.0\ref\PantryApplication.dll
+E:\D424\PantryApplication\bin\Debug\net8.0\appsettings.Production.json
