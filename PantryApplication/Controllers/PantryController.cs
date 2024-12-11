@@ -207,13 +207,14 @@ namespace PantryApplication.Controllers
                         .OrderBy(item => item.ExpirationDate)
                         .ToList();
                     title = "Items Expiring Soon Report";
-                    var expiringColumns = new List<string> { "Item Name", "Quantity", "Expiration Date" };
+                    var expiringColumns = new List<string> { "Item Name", "Quantity", "Unit", "Expiration Date" };
                     var expiringRows = expiringItems
                         .Select(item => new List<string>
                         {
                             item.Name,
-                            item.Quantity.ToString(),
-                            item.ExpirationDate?.ToString("yyyy-MM-dd")
+                            item.GetFormattedQuantity(),
+                            item.Unit,
+                            item.ExpirationDate?.ToString("MM-dd-yyyy")
                         }).ToList();
                     return View(Tuple.Create(title, expiringColumns, expiringRows));
                 //Count by category
@@ -234,7 +235,7 @@ namespace PantryApplication.Controllers
                         {
                             group.Category,
                             group.NumberOfItems.ToString(),
-                            group.LastItemAdded.ToString("yyyy-MM-dd")
+                            group.LastItemAdded.ToString("MM-dd-yyyy")
                         }).ToList();
                     return View(Tuple.Create(title, categoryColumns, categoryRows));
                 default:

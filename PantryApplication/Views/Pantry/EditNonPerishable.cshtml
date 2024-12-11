@@ -22,7 +22,7 @@
         </div>
 
         <div class="mb-3 row p-1">
-            <label class="form-label section-body">Brand</label>
+            <label class="form-label section-body">Brand <span class="text-muted">(optional)</span></label>
             <input asp-for="Brand" class="form-control" />
             <span asp-validation-for="Brand" class="text-danger"></span>
         </div>
@@ -63,7 +63,7 @@
         </div>
 
         <div class="mb-3 p-1">
-            <label class="form-label section-body">Expiration Date</label>
+            <label class="form-label section-body">Expiration Date <span class="text-muted">(optional)</span></label>
             <input asp-for="ExpirationDate" type="date" class="form-control" placeholder="e.g., Pantry, Fridge, Freezer" />
         </div>
 

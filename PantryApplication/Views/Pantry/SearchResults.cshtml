@@ -56,7 +56,9 @@ else
                     <th>
                         Expiration
                     </th>
-                    <th></th>
+                    <th>
+                        Edit / Delete
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -66,7 +68,7 @@ else
                         <td>@obj.Name</td>
                         <td>@obj.Category</td>
                         <td>@(!string.IsNullOrEmpty(obj.Brand) ? obj.Brand : "Not set")</td>
-                        <td>@obj.Quantity @obj.Unit</td>
+                        <td>@obj.GetFormattedQuantity() @obj.Unit</td>
                         <td>@obj.Location</td>
                         <td>@(obj.ExpirationDate.HasValue ? obj.ExpirationDate.Value.ToString("d") : "Not set")</td>
                         <td>
