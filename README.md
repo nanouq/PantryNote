@@ -23,7 +23,7 @@ PantryNote is a modern full-stack web application designed to help users efficie
 - Email Alerts: Send users emails (when opted-in) when their items are going to expire.
 - Mobile Application
 
-![The Pantry Note landing page](https://i.imgur.com/A3YltDV.png)
+![The Pantry Note landing page](https://i.imgur.com/9TVxYnm.png)
 
 ![The Pantry Note pantry page](https://i.imgur.com/zNmCm2m.jpeg)
 
